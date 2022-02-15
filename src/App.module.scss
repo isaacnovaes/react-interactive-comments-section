@@ -1,0 +1,104 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&family=Rubik:wght@400;500;700&display=swap");
+
+:root {
+	--font-family: "Rubik", sans-serif;
+
+	// primary colors
+	--moderate-blue: hsl(238, 40%, 52%);
+	--soft-Red: hsl(358, 79%, 66%);
+	--light-grayish-blue: hsl(239, 57%, 85%);
+	--pale-red: hsl(357, 100%, 86%);
+
+	// neutral colors
+	--dark-blue: hsl(212, 24%, 26%);
+	--grayish-blue: hsl(211, 10%, 45%);
+	--light-gray: hsl(223, 19%, 93%);
+	--very-light-gray: hsl(228, 33%, 97%);
+	--white: hsl(0, 0%, 100%);
+	--black: rgb(0, 0, 0);
+}
+
+html {
+	box-sizing: border-box;
+	line-height: 1.5;
+	-webkit-text-size-adjust: 100%; /* Prevent adjustments of font size after orientation changes in iOS. */
+	font-size: 16px;
+}
+
+/* set core root defaults */
+html:focus-within {
+	scroll-behavior: smooth;
+}
+
+/**
+ * Make all elements from the DOM inherit from the parent box-sizing
+ * Since `*` has a specificity of 0, it does not override the `html` value
+ * making all elements inheriting from the root box-sizing value
+ * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+ */
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+	margin: 0;
+	padding: 0;
+	font-size: 100%;
+}
+
+body {
+	min-height: 100vh;
+}
+
+/* Remove the border on images inside links in IE 10. */
+img {
+	border-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+input,
+textarea {
+	appearance: none;
+}
+
+/* Remove all animations, transitions, and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+	html:focus-within {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+/* Scroll bar style 
+html::-webkit-scrollbar {
+	width: 10px;
+}
+html::-webkit-scrollbar-track {
+	background: rgb(78, 77, 77);
+}
+html::-webkit-scrollbar-thumb {
+	background: rgba(131, 131, 131, 0.746);
+}
+html::-webkit-scrollbar-thumb:hover {
+	background: rgb(56, 56, 56);
+}
+html::-webkit-scrollbar-thumb:active {
+	background: rgba(27, 27, 27, 0.8);
+	border-radius: 10px;
+}
+*/
