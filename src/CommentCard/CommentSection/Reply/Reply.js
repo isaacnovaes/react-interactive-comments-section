@@ -6,7 +6,7 @@ export default function Reply() {
 	const classes = `${styles.Reply} ${stylesCard.forthGridControl}`;
 
 	return (
-		<div className={classes}>
+		<button type="button" className={classes}>
 			<span className={styles.icon}>
 				<svg width="14" height="13" xmlns="http://www.w3.org/2000/svg">
 					<path
@@ -16,6 +16,6 @@ export default function Reply() {
 				</svg>
 			</span>
 			<span>Reply</span>
-		</div>
+		</button>
 	);
 }

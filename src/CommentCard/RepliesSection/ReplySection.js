@@ -9,6 +9,7 @@ export default function ReplySection({ replies }) {
 			<div className={styles.replies}>
 				{replies.map(reply => (
 					<CommentSection
+						key={reply.id}
 						user={reply.user}
 						createdAt={reply.createdAt}
 						content={reply.content}

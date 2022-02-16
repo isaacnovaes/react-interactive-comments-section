@@ -9,7 +9,9 @@
 	align-items: center;
 	transition: 0.5s;
 	position: relative;
-
+	border: 1px solid rgba(255, 255, 255, 0.664);
+	background-color: var(--white);
+	
 	@include reset.background-hover;
 
 	span:not(.icon) {
