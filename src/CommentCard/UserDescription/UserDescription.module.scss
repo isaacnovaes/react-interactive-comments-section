@@ -1,0 +1,22 @@
+.UserDescription {
+	display: flex;
+	align-items: center;
+	column-gap: 18px;
+
+	.userAvatar {
+		width: 40px;
+		height: 40px;
+		background-size: cover;
+		border-radius: 50%;
+	}
+
+	.userName {
+		color: var(--dark-blue);
+		font-size: var(--size-400);
+		font-weight: 500;
+	}
+
+	.commentDate {
+		color: var(--grayish-blue);
+	}
+}

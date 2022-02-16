@@ -1,0 +1,20 @@
+@use "../../reset.module.scss";
+
+.Reply {
+	width: 110%;
+	padding: 2px 5px;
+	border-radius: 0.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	transition: 0.5s;
+	position: relative;
+
+	@include reset.background-hover;
+
+	span:not(.icon) {
+		color: var(--moderate-blue);
+		font-size: var(--size-450);
+		font-weight: 500;
+	}
+}

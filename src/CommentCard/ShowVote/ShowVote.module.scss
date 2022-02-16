@@ -1,0 +1,33 @@
+.ShowVote {
+	width: 100px;
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	background-color: var(--very-light-gray);
+	border-radius: 0.5rem;
+	padding: 2px;
+
+	.vote {
+		color: var(--moderate-blue);
+		font-size: var(--size-450);
+		font-weight: 500;
+	}
+
+	> button {
+		width: 30px;
+		height: 30px;
+		border: none;
+		background: none;
+		padding: 5px;
+
+		&:last-of-type {
+			width: 30px;
+			height: calc(30 / 11 * 3); // keep icon scale
+			transform: translateY(-3px); // fix minus icon vertical alignment
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
+	}
+}
