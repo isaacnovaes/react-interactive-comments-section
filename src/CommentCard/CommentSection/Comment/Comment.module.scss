@@ -2,5 +2,6 @@
 	color: var(--grayish-blue);
 	font-size: var(--size-400);
 	text-align: left;
-	word-break: break-all;
+	word-break: break-word;
+	hyphens: auto;
 }

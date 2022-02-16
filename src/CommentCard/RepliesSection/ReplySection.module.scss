@@ -1,0 +1,26 @@
+.ReplyCard {
+	display: flex;
+	column-gap: 1rem;
+
+	.replyBar {
+		width: 5px;
+		margin-left: 0;
+		background-color: var(--light-gray);
+	}
+
+	.replies {
+		display: flex;
+		flex-direction: column;
+		row-gap: 1rem;
+	}
+}
+
+@media screen and (min-width: 600px) {
+	.ReplyCard {
+		column-gap: 2.4rem;
+
+		.replyBar {
+			margin-left: 2.1rem;
+		}
+	}
+}

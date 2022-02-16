@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import styles from "./ShowVote.module.scss";
+import stylesCard from "../CommentSection.module.scss";
 
-export default function ShowVote({ score, className }) {
-	const classes = `${className} ${styles.ShowVote}`;
+export default function ShowVote({ score }) {
+	const classes = `${styles.ShowVote} ${stylesCard.thirdGridControl}`;
 
 	const [vote, setVote] = useState(score);
-	// const [plusButton, setPlusButton] = useState(false);
-	// const [minusButton, setMinusButton] = useState(false);
 
 	const increaseCounter = () => {
 		if (vote + 1 <= score + 1) {
@@ -19,8 +18,7 @@ export default function ShowVote({ score, className }) {
 			setVote(previousVote => previousVote - 1);
 		}
 	};
-	// #C5C6EF
-	// --light - grayish - blue;
+
 	return (
 		<div className={classes}>
 			<button type="button" onClick={increaseCounter}>

@@ -1,4 +1,4 @@
-.CommentCard {
+.CommentSection {
 	background-color: var(--white);
 	border-radius: 1rem;
 	padding: 1rem;
@@ -14,15 +14,14 @@
 	.secondGridControl {
 		grid-area: 2/1/3/4;
 	}
-	// .thirdGridControl {
-	// }
+
 	.forthGridControl {
 		grid-area: 3/3/4/4;
 	}
 }
 
 @media screen and (min-width: 600px) {
-	.CommentCard {
+	.CommentSection {
 		column-gap: 1.5rem;
 		.firstGridControl {
 			grid-area: 1/2/2/3;
@@ -40,8 +39,6 @@
 		.forthGridControl {
 			grid-area: 1/3/2/4;
 			justify-self: end;
-			width: 80px;
-			
 		}
 	}
 }

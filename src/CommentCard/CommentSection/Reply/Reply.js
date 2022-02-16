@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "./Reply.module.scss";
+import stylesCard from "../CommentSection.module.scss";
 
-export default function Reply({ className }) {
-	const classes = `${className} ${styles.Reply}`;
+export default function Reply() {
+	const classes = `${styles.Reply} ${stylesCard.forthGridControl}`;
 
 	return (
 		<div className={classes}>
