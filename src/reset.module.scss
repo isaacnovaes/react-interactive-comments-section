@@ -28,24 +28,6 @@
 	--size-1000: clamp(3.34rem, 2.45rem + 4.43vw, 5.61rem);
 }
 
-@mixin background-hover {
-	& {
-		position: relative;
-	}
-
-	&:hover {
-		cursor: pointer;
-
-		&::before {
-			display: block;
-			content: " ";
-			position: absolute;
-			inset: 0;
-			background-color: rgba(255, 255, 255, 0.664);
-		}
-	}
-}
-
 html {
 	box-sizing: border-box;
 	line-height: 1.5;
@@ -110,21 +92,21 @@ textarea {
 	}
 }
 
-/* Scroll bar style 
+//  Scroll bar style
 html::-webkit-scrollbar {
 	width: 10px;
 }
 html::-webkit-scrollbar-track {
-	background: rgb(78, 77, 77);
+	background: var(--very-light-gray);
 }
 html::-webkit-scrollbar-thumb {
-	background: rgba(131, 131, 131, 0.746);
+	border-radius: 10px;
+	background: var(--moderate-blue);
 }
 html::-webkit-scrollbar-thumb:hover {
 	background: rgb(56, 56, 56);
 }
 html::-webkit-scrollbar-thumb:active {
 	background: rgba(27, 27, 27, 0.8);
-	border-radius: 10px;
+	background: var(--light-grayish-blue);
 }
-*/
