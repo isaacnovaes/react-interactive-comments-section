@@ -1,41 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext } from "react";
 import styles from "./App.module.scss";
 import AppContainer from "./AppContainer/AppContainer";
 import CommentCard from "./CommentCard/CommentCard";
 import AddComment from "./AddComment/AddComment";
+import commentsDataContext from "./context/commentsData-context";
 
 function App() {
-	const [allComments, setAllComments] = useState(null);
+	const { currentUser, comments } = useContext(commentsDataContext);
 
-	useEffect(() => {
-		const fetchInitialUsersData = async () => {
-			const response = await fetch("./data.json");
-			const data = await response.json();
-			setAllComments(data);
-		};
-
-		fetchInitialUsersData();
-	}, []);
+	const showComments = () => (
+		<>
+			{comments.map(comment => (
+				<CommentCard
+					key={comment.id}
+					user={comment.user}
+					content={comment.content}
+					score={comment.score}
+					createdAt={comment.createdAt}
+					replies={comment.replies}
+				/>
+			))}
+			<AddComment user={currentUser} type="Send" />
+		</>
+	);
 
 	return (
-		allComments && (
-			<div className={styles.app}>
-				<AppContainer>
-					{allComments.comments.length &&
-						allComments.comments.map(comment => (
-							<CommentCard
-								key={comment.id}
-								user={comment.user}
-								content={comment.content}
-								score={comment.score}
-								createdAt={comment.createdAt}
-								replies={comment.replies}
-							/>
-						))}
-					<AddComment user={allComments.currentUser} type="Send" />
-				</AppContainer>
-			</div>
-		)
+		<div className={styles.app}>
+			<AppContainer>{comments?.length && showComments()}</AppContainer>
+		</div>
 	);
 }
 
