@@ -1,4 +1,4 @@
-@use "../reset.module.scss";
+@use "../mixins.module.scss";
 
 .AddComment {
 	background-color: var(--white);
@@ -52,7 +52,7 @@
 		transition: 0.5s;
 		text-transform: uppercase;
 
-		@include reset.background-hover;
+		@include mixins.background-hover;
 	}
 }
 
@@ -73,6 +73,46 @@
 
 		button {
 			grid-area: 1/3/2/4;
+		}
+	}
+}
+
+.AddCommentError {
+	textarea {
+		border-color: rgba(255, 0, 0, 0.883);
+		color: rgba(255, 0, 0, 0.883);
+		animation: error 1s ease 0s 1 normal forwards;
+
+		&::placeholder {
+			color: red;
+			opacity: 1;
+		}
+	}
+	@keyframes error {
+		0%,
+		100% {
+			transform: translateX(0);
+		}
+
+		10%,
+		30%,
+		50%,
+		70% {
+			transform: translateX(-10px);
+		}
+
+		20%,
+		40%,
+		60% {
+			transform: translateX(10px);
+		}
+
+		80% {
+			transform: translateX(8px);
+		}
+
+		90% {
+			transform: translateX(-8px);
 		}
 	}
 }
