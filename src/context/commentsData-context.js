@@ -5,6 +5,7 @@ const commentsDataContext = React.createContext({
 	comments: [],
 	addComment: item => {},
 	removeComment: item => {},
+	addReply: (replyToID, item) => {},
 });
 
 export default commentsDataContext;

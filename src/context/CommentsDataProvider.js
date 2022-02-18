@@ -19,12 +19,26 @@ const reducer = (state, action) => {
 				comments: state.comments
 					.filter(comment => comment.id !== action.commentId)
 					.map(comment => {
-						if (!comment.replies) return comment; // avoid filtering the replies if the comment doesn't have a reply
+						if (!comment.replies.length) return comment; // avoid filtering the replies if the comment doesn't have a reply
 						comment.replies = comment.replies.filter(
 							reply => reply.id !== action.commentId
 						);
 						return comment;
 					}),
+			};
+		case "addReply":
+			return {
+				currentUser: state.currentUser,
+				comments: state.comments.map(comment => {
+					if (comment.id === action.replyToID) {
+						return {
+							...comment,
+							replies: [...comment.replies, action.comment],
+						};
+					} else {
+						return comment;
+					}
+				}),
 			};
 		default:
 			return new Error("Something went wrong");
@@ -53,6 +67,8 @@ const CommentsDataProvider = props => {
 		comments: state.comments,
 		addComment: comment => dispatch({ type: "addComment", comment }),
 		removeComment: commentId => dispatch({ type: "removeComment", commentId }),
+		addReply: (replyToID, comment) =>
+			dispatch({ type: "addReply", replyToID, comment }),
 	};
 
 	return (

@@ -6,7 +6,7 @@ import AddComment from "./AddComment/AddComment";
 import commentsDataContext from "./context/commentsData-context";
 
 function App() {
-	const { currentUser, comments } = useContext(commentsDataContext);
+	const { comments } = useContext(commentsDataContext);
 
 	const showComments = () => (
 		<>
@@ -21,7 +21,7 @@ function App() {
 					replies={comment.replies}
 				/>
 			))}
-			<AddComment user={currentUser} type="Send" />
+			<AddComment type="Send" replyToID={null} />
 		</>
 	);
 

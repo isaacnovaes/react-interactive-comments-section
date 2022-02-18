@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext } from "react";
 import styles from "./AddComment.module.scss";
 import commentsDataContext from "../context/commentsData-context";
 
-export default function AddComment({ user, type }) {
+export default function AddComment({ replyToID, type, className }) {
 	const comment = useRef("");
 	const [error, setError] = useState(false);
 
@@ -10,27 +10,44 @@ export default function AddComment({ user, type }) {
 
 	const showError = () => setTimeout(() => setError(false), 2500);
 
-	const showComment = () => {
+	const addCommentHandler = () => {
 		if (comment.current.value.trim() === "") {
 			setError(true);
 			showError();
 			return;
 		}
 
-		context.addComment({
-			id: Math.random(),
-			content: comment.current.value.trim(),
-			createdAt: "1 month ago",
-			score: 0,
-			user: context.currentUser,
-			replies: [],
-		});
+		if (!replyToID) {
+			context.addComment({
+				id: Math.random() * 100,
+				content: comment.current.value.trim(),
+				createdAt: "1 month ago",
+				score: 0,
+				user: context.currentUser,
+				replies: [],
+			});
+		}
+
+		if (replyToID) {
+			context.addReply(replyToID, {
+				id: Math.random() * 100,
+				content: comment.current.value.trim(),
+				createdAt: "1 month ago",
+				score: 0,
+				replyingTo: "hello",
+				user: context.currentUser,
+			});
+		}
 
 		comment.current.value = "";
 	};
 
 	return (
-		<div className={`${styles.AddComment} ${error && styles.AddCommentError}`}>
+		<div
+			className={`${styles.AddComment} ${
+				error && styles.AddCommentError
+			} ${className}`}
+		>
 			<textarea
 				name="comment"
 				id="comment"
@@ -39,8 +56,8 @@ export default function AddComment({ user, type }) {
 				placeholder="Add a comment..."
 				ref={comment}
 			></textarea>
-			<img src={user.image.webp} alt="Current user avatar" />
-			<button type="button" onClick={showComment}>
+			<img src={context.currentUser.image.webp} alt="Current user avatar" />
+			<button type="button" onClick={addCommentHandler}>
 				{type}
 			</button>
 		</div>

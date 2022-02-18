@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import UserDescription from "./UserDescription/UserDescription";
 import Comment from "./Comment/Comment";
 import ShowVote from "./ShowVote/ShowVote";
 import Action from "./Action/Action";
 import styles from "./CommentSection.module.scss";
+import AddComment from "../../AddComment/AddComment";
 
 export default function CommentSection({
 	userID,
@@ -12,12 +13,27 @@ export default function CommentSection({
 	content,
 	score,
 }) {
+	const [showTextArea, setShowTextArea] = useState(false);
+	const [replyToID, setReplyToID] = useState(null);
+
+	const replyTo = ID => {
+		setReplyToID(ID);
+		setShowTextArea(true);
+	};
+
 	return (
 		<div className={styles.CommentSection}>
 			<UserDescription user={user} createdAt={createdAt} />
 			<Comment content={content} />
 			<ShowVote score={score} />
-			<Action userID={userID} user={user} />
+			<Action userID={userID} user={user} replyTo={replyTo} />
+			{showTextArea && (
+				<AddComment
+					replyToID={replyToID}
+					type={"Reply"}
+					className={styles.fifthGridControl}
+				/>
+			)}
 		</div>
 	);
 }

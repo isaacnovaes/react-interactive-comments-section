@@ -2,10 +2,7 @@ import React from "react";
 import styles from "./Action.module.scss";
 
 export default function Edit({ userID }) {
-	// const [showEditCommentTextarea, setShowEditCommentTextarea] = useState(false);
-
-	// const context = useContext(commentsDataContext);
-
+	
 	const editCommentHandler = () => console.log(userID);
 
 	return (
