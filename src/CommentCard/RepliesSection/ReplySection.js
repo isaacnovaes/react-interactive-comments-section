@@ -10,6 +10,7 @@ export default function ReplySection({ replies }) {
 				{replies.map(reply => (
 					<CommentSection
 						key={reply.id}
+						userID={reply.id}
 						user={reply.user}
 						createdAt={reply.createdAt}
 						content={reply.content}

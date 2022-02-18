@@ -3,6 +3,7 @@ import CommentSection from "./CommentSection/CommentSection";
 import ReplySection from "./RepliesSection/ReplySection";
 
 export default function CommentCard({
+	userID,
 	user,
 	content,
 	score,
@@ -12,6 +13,7 @@ export default function CommentCard({
 	return (
 		<React.Fragment>
 			<CommentSection
+				userID={userID}
 				user={user}
 				createdAt={createdAt}
 				content={content}

@@ -22,6 +22,7 @@
 
 @media screen and (min-width: 600px) {
 	.CommentSection {
+		grid-template-columns: 40px auto auto;
 		column-gap: 1.5rem;
 		.firstGridControl {
 			grid-area: 1/2/2/3;

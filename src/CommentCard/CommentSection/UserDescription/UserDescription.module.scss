@@ -16,6 +16,13 @@
 		font-weight: 500;
 	}
 
+	.currentUser {
+		color: var(--white);
+		background-color: var(--moderate-blue);
+		padding: 0px 6px;
+		border-radius: 2px;
+	}
+
 	.commentDate {
 		color: var(--grayish-blue);
 	}
