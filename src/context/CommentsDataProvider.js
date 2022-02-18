@@ -11,14 +11,20 @@ const reducer = (state, action) => {
 		case "addComment":
 			return {
 				currentUser: state.currentUser,
-				comments: state.comments.push(action.comment),
+				comments: [...state.comments, action.comment],
 			};
 		case "removeComment":
 			return {
 				currentUser: state.currentUser,
-				comments: state.comments.filter(
-					comment => comment.id !== action.commentId
-				),
+				comments: state.comments
+					.filter(comment => comment.id !== action.commentId)
+					.map(comment => {
+						if (!comment.replies) return comment; // avoid filtering the replies if the comment doesn't have a reply
+						comment.replies = comment.replies.filter(
+							reply => reply.id !== action.commentId
+						);
+						return comment;
+					}),
 			};
 		default:
 			return new Error("Something went wrong");

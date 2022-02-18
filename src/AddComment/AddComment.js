@@ -1,9 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import styles from "./AddComment.module.scss";
+import commentsDataContext from "../context/commentsData-context";
 
 export default function AddComment({ user, type }) {
 	const comment = useRef("");
 	const [error, setError] = useState(false);
+
+	const context = useContext(commentsDataContext);
 
 	const showError = () => setTimeout(() => setError(false), 2500);
 
@@ -13,6 +16,17 @@ export default function AddComment({ user, type }) {
 			showError();
 			return;
 		}
+
+		context.addComment({
+			id: Math.random(),
+			content: comment.current.value.trim(),
+			createdAt: "1 month ago",
+			score: 0,
+			user: context.currentUser,
+			replies: [],
+		});
+
+		comment.current.value = "";
 	};
 
 	return (

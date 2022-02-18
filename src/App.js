@@ -13,6 +13,7 @@ function App() {
 			{comments.map(comment => (
 				<CommentCard
 					key={comment.id}
+					userID={comment.id}
 					user={comment.user}
 					content={comment.content}
 					score={comment.score}
