@@ -1,0 +1,52 @@
+@use "../../../mixins.module.scss";
+
+.Action {
+	padding: 2px 5px;
+	border-radius: 0.5rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	column-gap: 2rem;
+	position: relative;
+	background-color: var(--white);
+
+	.Reply {
+		@include mixins.background-hover;
+		.ReplyText {
+			width: max-content;
+			color: var(--moderate-blue);
+			font-size: var(--size-450);
+			font-weight: 500;
+			margin-left: 10px;
+		}
+	}
+
+	.Delete,
+	.Edit {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		column-gap: 0.5rem;
+		padding: 2px 10px;
+
+		@include mixins.background-hover;
+
+		button {
+			border: none;
+			background-color: transparent;
+		}
+
+		span {
+			font-size: var(--size-450);
+			font-weight: 500;
+		}
+	}
+
+	.Delete span {
+		color: #ed6368;
+	}
+
+	.Edit span {
+		color: #5357b6;
+	}
+}
