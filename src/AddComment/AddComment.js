@@ -2,7 +2,12 @@ import React, { useState, useRef, useContext } from "react";
 import styles from "./AddComment.module.scss";
 import commentsDataContext from "../context/commentsData-context";
 
-export default function AddComment({ replyToID, type, className }) {
+export default function AddComment({
+	replyToID,
+	type,
+	className,
+	onShowTestArea,
+}) {
 	const comment = useRef("");
 	const [error, setError] = useState(false);
 
@@ -37,10 +42,14 @@ export default function AddComment({ replyToID, type, className }) {
 				replyingTo: "hello",
 				user: context.currentUser,
 			});
+
+			onShowTestArea(false);
 		}
 
 		comment.current.value = "";
 	};
+
+	const cancelReplyHandler = () => onShowTestArea(false);
 
 	return (
 		<div
@@ -57,9 +66,22 @@ export default function AddComment({ replyToID, type, className }) {
 				ref={comment}
 			></textarea>
 			<img src={context.currentUser.image.webp} alt="Current user avatar" />
-			<button type="button" onClick={addCommentHandler}>
+			<button
+				type="button"
+				onClick={addCommentHandler}
+				className={styles.ReplyButton}
+			>
 				{type}
 			</button>
+			{type === "Reply" && (
+				<button
+					type="button"
+					onClick={cancelReplyHandler}
+					className={styles.CancelReplyButton}
+				>
+					Cancel
+				</button>
+			)}
 		</div>
 	);
 }
