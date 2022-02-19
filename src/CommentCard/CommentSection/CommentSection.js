@@ -32,6 +32,7 @@ export default function CommentSection({
 					replyToID={replyToID}
 					type={"Reply"}
 					className={styles.fifthGridControl}
+					onShowTestArea={setShowTextArea}
 				/>
 			)}
 		</div>
