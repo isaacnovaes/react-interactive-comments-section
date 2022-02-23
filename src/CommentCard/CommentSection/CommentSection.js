@@ -16,7 +16,10 @@ export default function CommentSection({
 	isReplyOfReply,
 }) {
 	const [showTextArea, setShowTextArea] = useState(false);
+	const [showEditArea, setShowEditArea] = useState(false);
+
 	const [replyToID, setReplyToID] = useState(null);
+	const [editIDOf, setEditIDOf] = useState(null);
 
 	const context = useContext(commentsDataContext);
 
@@ -25,11 +28,21 @@ export default function CommentSection({
 		setShowTextArea(true);
 	};
 
+	const editID = ID => {
+		setEditIDOf(ID);
+		setShowEditArea(true);
+	};
+
 	const replyOfReply = isReplyOfReply => {
 		if (!isReplyOfReply) {
 			return (
 				<>
-					<Action userID={userID} user={user} replyTo={replyTo} />
+					<Action
+						userID={userID}
+						user={user}
+						replyTo={replyTo}
+						editID={editID}
+					/>
 					{showTextArea && (
 						<AddCommentSection
 							replyToID={replyToID}
@@ -38,12 +51,22 @@ export default function CommentSection({
 							onShowTestArea={setShowTextArea}
 						/>
 					)}
+					{showEditArea && (
+						<AddCommentSection
+							editID={editIDOf}
+							type={"Update"}
+							className={styles.fifthGridControl}
+							onShowEditArea={setShowEditArea}
+						/>
+					)}
 				</>
 			);
 		}
 
 		if (context.currentUser.username === user.username) {
-			return <Action userID={userID} user={user} replyTo={replyTo} />;
+			return (
+				<Action userID={userID} user={user} replyTo={replyTo} editID={editID} />
+			);
 		}
 	};
 

@@ -65,6 +65,35 @@ const reducer = (state, action) => {
 					}
 				}),
 			};
+
+		case "editComment":
+			return {
+				currentUser: state.currentUser,
+				comments: state.comments.map(comment => {
+					if (comment.id === action.id) {
+						return { ...comment, content: action.content };
+					} else {
+						comment.replies = comment.replies.map(reply => {
+							if (reply.id === action.id)
+								return { ...reply, content: action.content };
+							else {
+								reply.replies = reply.replies.map(replyOfReply => {
+									if (replyOfReply.id === action.id)
+										return {
+											...replyOfReply,
+											content: action.content,
+										};
+									else return replyOfReply;
+								});
+
+								return reply;
+							}
+						});
+
+						return comment;
+					}
+				}),
+			};
 		default:
 			return new Error("Something went wrong");
 	}
@@ -94,6 +123,7 @@ const CommentsDataProvider = props => {
 		removeComment: commentId => dispatch({ type: "removeComment", commentId }),
 		addReply: (replyToID, comment) =>
 			dispatch({ type: "addReply", replyToID, comment }),
+		editID: ({ id, content }) => dispatch({ type: "editComment", id, content }),
 	};
 
 	return (

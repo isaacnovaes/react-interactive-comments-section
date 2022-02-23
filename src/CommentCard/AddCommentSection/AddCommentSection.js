@@ -4,9 +4,11 @@ import commentsDataContext from "../../context/commentsData-context";
 
 export default function AddCommentSection({
 	replyToID,
+	editID,
 	type,
 	className,
 	onShowTestArea,
+	onShowEditArea,
 }) {
 	const comment = useRef("");
 	const [error, setError] = useState(false);
@@ -14,6 +16,9 @@ export default function AddCommentSection({
 	const context = useContext(commentsDataContext);
 
 	const showError = () => setTimeout(() => setError(false), 2500);
+
+	const cancelReplyHandler = () => onShowTestArea(false);
+	const cancelEditHandler = () => onShowEditArea(false);
 
 	const addCommentHandler = () => {
 		if (comment.current.value.trim() === "") {
@@ -49,7 +54,61 @@ export default function AddCommentSection({
 		comment.current.value = "";
 	};
 
-	const cancelReplyHandler = () => onShowTestArea(false);
+	const updateCommentHandler = () => {
+		if (comment.current.value.trim() === "") {
+			setError(true);
+			showError();
+			return;
+		}
+
+		if (editID) {
+			context.editID({ id: editID, content: comment.current.value.trim() });
+
+			onShowEditArea(false);
+		}
+
+		comment.current.value = "";
+	};
+
+	const reply = () => (
+		<>
+			<button
+				type="button"
+				onClick={addCommentHandler}
+				className={styles.ReplyButton}
+			>
+				{type}
+			</button>
+
+			<button
+				type="button"
+				onClick={cancelReplyHandler}
+				className={styles.AdditionalButton}
+			>
+				Cancel
+			</button>
+		</>
+	);
+
+	const update = () => (
+		<>
+			<button
+				type="button"
+				onClick={updateCommentHandler}
+				className={styles.ReplyButton}
+			>
+				{type}
+			</button>
+
+			<button
+				type="button"
+				onClick={cancelEditHandler}
+				className={styles.AdditionalButton}
+			>
+				Cancel
+			</button>
+		</>
+	);
 
 	return (
 		<div
@@ -66,22 +125,17 @@ export default function AddCommentSection({
 				ref={comment}
 			></textarea>
 			<img src={context.currentUser.image.webp} alt="Current user avatar" />
-			<button
-				type="button"
-				onClick={addCommentHandler}
-				className={styles.ReplyButton}
-			>
-				{type}
-			</button>
-			{type === "Reply" && (
+			{type === "Send" && (
 				<button
 					type="button"
-					onClick={cancelReplyHandler}
-					className={styles.CancelReplyButton}
+					onClick={addCommentHandler}
+					className={styles.ReplyButton}
 				>
-					Cancel
+					{type}
 				</button>
 			)}
+			{type === "Reply" && reply()}
+			{type === "Update" && update()}
 		</div>
 	);
 }

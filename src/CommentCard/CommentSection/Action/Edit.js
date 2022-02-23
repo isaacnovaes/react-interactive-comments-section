@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./Action.module.scss";
 
-export default function Edit({ userID }) {
+export default function Edit({ userID, editID }) {
 	
-	const editCommentHandler = () => console.log(userID);
+	const editCommentHandler = () => editID(userID);
 
 	return (
 		<div className={styles.Edit} onClick={editCommentHandler}>

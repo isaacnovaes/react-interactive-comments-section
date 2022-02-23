@@ -75,7 +75,7 @@
 		@include mixins.background-hover;
 	}
 
-	.CancelReplyButton {
+	.AdditionalButton {
 		@extend .ReplyButton;
 		grid-area: 2/2/3/3;
 		justify-self: end;
@@ -101,7 +101,7 @@
 			grid-area: 1/3/2/4;
 		}
 
-		.CancelReplyButton {
+		.AdditionalButton {
 			grid-area: 1/3/2/4;
 			justify-self: center;
 			align-self: center;

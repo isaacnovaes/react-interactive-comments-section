@@ -6,7 +6,7 @@ import Edit from "./Edit";
 import Reply from "./Reply";
 import commentsDataContext from "../../../context/commentsData-context";
 
-export default function Action({ userID, user, replyTo }) {
+export default function Action({ userID, user, replyTo, editID }) {
 	const { currentUser } = useContext(commentsDataContext);
 
 	const classes = `${styles.Action} ${stylesCard.forthGridControl}`;
@@ -16,7 +16,7 @@ export default function Action({ userID, user, replyTo }) {
 			<>
 				<Delete userID={userID} />
 
-				<Edit userID={userID} />
+				<Edit userID={userID} editID = {editID}/>
 			</>
 		) : (
 			<Reply userID={userID} replyTo={replyTo} />
