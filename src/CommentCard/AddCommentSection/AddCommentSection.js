@@ -1,8 +1,8 @@
 import React, { useState, useRef, useContext } from "react";
-import styles from "./AddComment.module.scss";
-import commentsDataContext from "../context/commentsData-context";
+import styles from "./AddCommentSection.module.scss";
+import commentsDataContext from "../../context/commentsData-context";
 
-export default function AddComment({
+export default function AddCommentSection({
 	replyToID,
 	type,
 	className,

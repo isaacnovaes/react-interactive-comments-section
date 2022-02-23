@@ -2,8 +2,8 @@ import React, { useContext } from "react";
 import styles from "./App.module.scss";
 import AppContainer from "./AppContainer/AppContainer";
 import CommentCard from "./CommentCard/CommentCard";
-import AddComment from "./AddComment/AddComment";
 import commentsDataContext from "./context/commentsData-context";
+import AddCommentSection from "./CommentCard/AddCommentSection/AddCommentSection";
 
 function App() {
 	const { comments } = useContext(commentsDataContext);
@@ -21,7 +21,7 @@ function App() {
 					replies={comment.replies}
 				/>
 			))}
-			<AddComment type="Send" replyToID={null} />
+			<AddCommentSection type="Send" replyToID={null} />
 		</>
 	);
 

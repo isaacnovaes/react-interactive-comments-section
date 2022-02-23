@@ -4,7 +4,7 @@ import Comment from "./Comment/Comment";
 import ShowVote from "./ShowVote/ShowVote";
 import Action from "./Action/Action";
 import styles from "./CommentSection.module.scss";
-import AddComment from "../../AddComment/AddComment";
+import AddCommentSection from "../AddCommentSection/AddCommentSection.js";
 
 export default function CommentSection({
 	userID,
@@ -28,7 +28,7 @@ export default function CommentSection({
 			<ShowVote score={score} />
 			<Action userID={userID} user={user} replyTo={replyTo} />
 			{showTextArea && (
-				<AddComment
+				<AddCommentSection
 					replyToID={replyToID}
 					type={"Reply"}
 					className={styles.fifthGridControl}
