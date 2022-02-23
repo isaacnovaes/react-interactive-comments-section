@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import UserDescription from "./UserDescription/UserDescription";
 import Comment from "./Comment/Comment";
 import ShowVote from "./ShowVote/ShowVote";
 import Action from "./Action/Action";
 import styles from "./CommentSection.module.scss";
 import AddCommentSection from "../AddCommentSection/AddCommentSection.js";
+import commentsDataContext from "../../context/commentsData-context";
 
 export default function CommentSection({
 	userID,
@@ -16,6 +17,8 @@ export default function CommentSection({
 }) {
 	const [showTextArea, setShowTextArea] = useState(false);
 	const [replyToID, setReplyToID] = useState(null);
+
+	const context = useContext(commentsDataContext);
 
 	const replyTo = ID => {
 		setReplyToID(ID);
@@ -37,6 +40,10 @@ export default function CommentSection({
 					)}
 				</>
 			);
+		}
+
+		if (context.currentUser.username === user.username) {
+			return <Action userID={userID} user={user} replyTo={replyTo} />;
 		}
 	};
 

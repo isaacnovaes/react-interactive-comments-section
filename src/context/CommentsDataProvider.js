@@ -24,6 +24,21 @@ const reducer = (state, action) => {
 							reply => reply.id !== action.commentId
 						);
 						return comment;
+					})
+					.map(comment => {
+						if (!comment.replies.length) return comment;
+
+						comment.replies = comment.replies.map(replies => {
+							if (!replies.replies?.length) return replies;
+
+							replies.replies = replies.replies.filter(
+								reply => reply.id !== action.commentId
+							);
+
+							return replies;
+						});
+
+						return comment;
 					}),
 			};
 		case "addReply":
@@ -36,7 +51,17 @@ const reducer = (state, action) => {
 							replies: [...comment.replies, action.comment],
 						};
 					} else {
-						return comment;
+						return {
+							...comment,
+							replies: comment.replies.map(reply => {
+								if (reply.id === action.replyToID)
+									return {
+										...reply,
+										replies: [...reply.replies, action.comment],
+									};
+								else return reply;
+							}),
+						};
 					}
 				}),
 			};

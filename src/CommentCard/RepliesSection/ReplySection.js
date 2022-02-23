@@ -20,7 +20,10 @@ export default function ReplySection({ replies, isReplyOfReply }) {
 									isReplyOfReply={isReplyOfReply}
 								/>
 								{reply.replies?.length > 0 && (
-									<ReplySection replies={reply.replies} isReplyOfReply={true} />
+									<ReplySection
+										replies={reply.replies}
+										isReplyOfReply={false}
+									/>
 								)}
 							</React.Fragment>
 						);

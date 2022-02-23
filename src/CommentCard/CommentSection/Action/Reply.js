@@ -2,9 +2,7 @@ import React from "react";
 import styles from "./Action.module.scss";
 
 export default function Reply({ userID, replyTo }) {
-	const replyHandler = () => {
-		replyTo(userID);
-	};
+	const replyHandler = () => replyTo(userID);
 
 	return (
 		<div className={styles.Reply} onClick={replyHandler}>
