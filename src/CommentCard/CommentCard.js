@@ -20,7 +20,9 @@ export default function CommentCard({
 				score={score}
 			/>
 
-			{replies.length > 0 && <ReplySection replies={replies} />}
+			{replies.length > 0 && (
+				<ReplySection replies={replies} isReplyOfReply={false} />
+			)}
 		</React.Fragment>
 	);
 }

@@ -12,6 +12,7 @@ export default function CommentSection({
 	createdAt,
 	content,
 	score,
+	isReplyOfReply,
 }) {
 	const [showTextArea, setShowTextArea] = useState(false);
 	const [replyToID, setReplyToID] = useState(null);
@@ -21,20 +22,30 @@ export default function CommentSection({
 		setShowTextArea(true);
 	};
 
+	const replyOfReply = isReplyOfReply => {
+		if (!isReplyOfReply) {
+			return (
+				<>
+					<Action userID={userID} user={user} replyTo={replyTo} />
+					{showTextArea && (
+						<AddCommentSection
+							replyToID={replyToID}
+							type={"Reply"}
+							className={styles.fifthGridControl}
+							onShowTestArea={setShowTextArea}
+						/>
+					)}
+				</>
+			);
+		}
+	};
+
 	return (
 		<div className={styles.CommentSection}>
 			<UserDescription user={user} createdAt={createdAt} />
 			<Comment content={content} />
 			<ShowVote score={score} />
-			<Action userID={userID} user={user} replyTo={replyTo} />
-			{showTextArea && (
-				<AddCommentSection
-					replyToID={replyToID}
-					type={"Reply"}
-					className={styles.fifthGridControl}
-					onShowTestArea={setShowTextArea}
-				/>
-			)}
+			{replyOfReply(isReplyOfReply)}
 		</div>
 	);
 }
