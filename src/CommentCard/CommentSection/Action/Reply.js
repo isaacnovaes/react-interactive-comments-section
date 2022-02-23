@@ -5,7 +5,11 @@ export default function Reply({ userID, replyTo }) {
 	const replyHandler = () => replyTo(userID);
 
 	return (
-		<div className={styles.Reply} onClick={replyHandler}>
+		<div
+			className={styles.Reply}
+			onClick={replyHandler}
+			aria-label="Reply comment"
+		>
 			<span className={styles.ReplyIcon}>
 				<svg width="14" height="13" xmlns="http://www.w3.org/2000/svg">
 					<path

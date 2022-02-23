@@ -11,6 +11,7 @@
 	background-color: var(--white);
 
 	.Reply {
+		display: block;
 		@include mixins.background-hover;
 
 		.ReplyText {
