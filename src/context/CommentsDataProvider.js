@@ -73,10 +73,14 @@ const reducer = (state, action) => {
 					if (comment.id === action.id) {
 						return { ...comment, content: action.content };
 					} else {
+						if (!comment.replies.length > 0) return comment;
+
 						comment.replies = comment.replies.map(reply => {
 							if (reply.id === action.id)
 								return { ...reply, content: action.content };
 							else {
+								if (!reply.replies?.length > 0) return reply;
+
 								reply.replies = reply.replies.map(replyOfReply => {
 									if (replyOfReply.id === action.id)
 										return {
