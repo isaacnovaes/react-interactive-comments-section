@@ -70,7 +70,7 @@ export default function AddCommentSection({
 		comment.current.value = "";
 	};
 
-	const reply = () => (
+	const reply = (
 		<>
 			<button
 				type="button"
@@ -90,7 +90,7 @@ export default function AddCommentSection({
 		</>
 	);
 
-	const update = () => (
+	const update = (
 		<>
 			<button
 				type="button"
@@ -134,8 +134,8 @@ export default function AddCommentSection({
 					{type}
 				</button>
 			)}
-			{type === "Reply" && reply()}
-			{type === "Update" && update()}
+			{type === "Reply" && reply}
+			{type === "Update" && update}
 		</div>
 	);
 }
