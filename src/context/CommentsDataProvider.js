@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import commentsDataContext from "./commentsData-context";
 
 const reducer = (state, action) => {
@@ -71,18 +71,21 @@ const reducer = (state, action) => {
 				currentUser: state.currentUser,
 				comments: state.comments.map(comment => {
 					if (comment.id === action.id) {
+						// check comments
 						return { ...comment, content: action.content };
 					} else {
 						if (!comment.replies.length > 0) return comment;
 
 						comment.replies = comment.replies.map(reply => {
 							if (reply.id === action.id)
+								// check comment replies
 								return { ...reply, content: action.content };
 							else {
 								if (!reply.replies?.length > 0) return reply;
 
 								reply.replies = reply.replies.map(replyOfReply => {
 									if (replyOfReply.id === action.id)
+										// check replies of a comment reply
 										return {
 											...replyOfReply,
 											content: action.content,
@@ -105,6 +108,7 @@ const reducer = (state, action) => {
 
 const CommentsDataProvider = props => {
 	const [state, dispatch] = useReducer(reducer, {});
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		const fetchInitialUsersData = async () => {
@@ -115,12 +119,14 @@ const CommentsDataProvider = props => {
 				currentUser: data.currentUser,
 				comments: data.comments,
 			});
+			setTimeout(() => setIsLoading(false), 1000);
 		};
 
 		fetchInitialUsersData();
 	}, []);
 
 	const data = {
+		isLoading,
 		currentUser: state.currentUser,
 		comments: state.comments,
 		addComment: comment => dispatch({ type: "addComment", comment }),

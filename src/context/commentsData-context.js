@@ -1,6 +1,7 @@
 import React from "react";
 
 const commentsDataContext = React.createContext({
+	isLoading: true,
 	currentUser: [],
 	comments: [],
 	addComment: item => {},
