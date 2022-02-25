@@ -4,8 +4,6 @@
 
 ![Project preview](./design/desktop-preview.jpg)
 
-This is a solution to the [Interactive comments section challenge on Frontend Mentor](https://www.frontendmentor.io/challenges/interactive-comments-section-iG1RugEG9). Frontend Mentor challenges help you improve your coding skills by building realistic projects.
-
 ## Table of contents
 
 - [Frontend Mentor - Interactive comments section solution](#frontend-mentor---interactive-comments-section-solution)
@@ -65,9 +63,9 @@ Users should be able to:
 
 ### Screenshots
 
-![Mobile](./design/mobile-design.jpg)
+[Mobile](./design/mobile-design.jpg)
   
-![Desktop](./design/desktop-design.jpg)
+[Desktop](./design/desktop-design.jpg)
 
 ### Links
 
