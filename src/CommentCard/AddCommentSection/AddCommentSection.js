@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import styles from "./AddCommentSection.module.scss";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { commentAction } from "../../store/comment-slice";
+import { commentSliceAction } from "../../store/comment-slice";
 
 export default function AddCommentSection({
 	replyToID,
@@ -32,7 +32,7 @@ export default function AddCommentSection({
 
 		if (!replyToID) {
 			dispatch(
-				commentAction.addComment({
+				commentSliceAction.addComment({
 					id: Math.random() * 100,
 					content: comment.current.value.trim(),
 					createdAt: "now",
@@ -45,7 +45,7 @@ export default function AddCommentSection({
 
 		if (replyToID) {
 			dispatch(
-				commentAction.addReply({
+				commentSliceAction.addReply({
 					replyToID,
 					comment: {
 						id: Math.random() * 100,
@@ -72,7 +72,7 @@ export default function AddCommentSection({
 		}
 		if (editID) {
 			dispatch(
-				commentAction.editComment({
+				commentSliceAction.editComment({
 					id: editID,
 					content: comment.current.value.trim(),
 				})

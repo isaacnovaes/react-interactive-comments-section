@@ -1,6 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialCommentState = { currentUser: [], comments: [] };
+const initialCommentState = {
+	currentUser: [],
+	comments: [],
+	deleteComment: null,
+};
 
 const commentSlice = createSlice({
 	name: "comment",
@@ -12,6 +16,12 @@ const commentSlice = createSlice({
 		},
 		addComment(state, action) {
 			state.comments.push(action.payload);
+		},
+		takeCommentID(state, action) {
+			state.deleteComment = action.payload;
+		},
+		resetDeleteCommentID(state) {
+			state.deleteComment = null;
 		},
 		removeComment(state, action) {
 			state.comments = state.comments
@@ -38,6 +48,7 @@ const commentSlice = createSlice({
 
 					return comment;
 				});
+			state.deleteComment = null; // reset state
 		},
 		addReply(state, action) {
 			state.comments = state.comments.map(comment => {
@@ -98,4 +109,4 @@ const commentSlice = createSlice({
 });
 
 export default commentSlice;
-export const commentAction = commentSlice.actions;
+export const commentSliceAction = commentSlice.actions;

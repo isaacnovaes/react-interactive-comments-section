@@ -4,12 +4,14 @@ import AppContainer from "./AppContainer/AppContainer";
 import CommentCard from "./CommentCard/CommentCard";
 import AddCommentSection from "./CommentCard/AddCommentSection/AddCommentSection";
 import Loading from "./Loading/Loading";
+import Modal from "./Modal/Modal";
 import { useSelector, useDispatch } from "react-redux";
 import { uiSliceAction } from "./store/ui-slice";
-import { commentAction } from "./store/comment-slice";
+import { commentSliceAction } from "./store/comment-slice";
 
 function App() {
 	const isLoading = useSelector(state => state.ui.loading);
+	const showModal = useSelector(state => state.ui.showModal);
 	const comments = useSelector(state => state.comment.comments);
 	const dispatch = useDispatch();
 
@@ -18,7 +20,7 @@ function App() {
 			const response = await fetch("./data.json");
 			const data = await response.json();
 			dispatch(
-				commentAction.updateCommentsState({
+				commentSliceAction.updateCommentsState({
 					currentUser: data.currentUser,
 					comments: data.comments,
 				})
@@ -53,9 +55,12 @@ function App() {
 	);
 
 	return (
-		<div className={styles.app}>
-			<AppContainer>{showComments}</AppContainer>
-		</div>
+		<>
+			<div className={styles.app}>
+				<AppContainer>{showComments}</AppContainer>
+				{showModal && <Modal />}
+			</div>
+		</>
 	);
 }
 

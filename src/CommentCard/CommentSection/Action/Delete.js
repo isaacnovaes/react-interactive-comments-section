@@ -1,13 +1,16 @@
 import React from "react";
 import styles from "./Action.module.scss";
-import { commentAction } from "../../../store/comment-slice";
+import { commentSliceAction } from "../../../store/comment-slice";
+import { uiSliceAction } from "../../../store/ui-slice";
 import { useDispatch } from "react-redux";
 
 export default function Delete({ userID }) {
 	const dispatch = useDispatch();
 
-	const deleteCommentHandler = () =>
-		dispatch(commentAction.removeComment(userID));
+	const deleteCommentHandler = () => {
+		dispatch(commentSliceAction.takeCommentID(userID));
+		dispatch(uiSliceAction.setShowModal(true));
+	};
 
 	return (
 		<div className={styles.Delete} onClick={deleteCommentHandler}>

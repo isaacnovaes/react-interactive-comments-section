@@ -1,0 +1,60 @@
+.ModalBackDrop {
+	position: absolute;
+	inset: 0;
+	z-index: 5;
+	min-height: 100vh;
+	background-color: rgba(0, 0, 0, 0.616);
+
+	.Modal {
+		background-color: var(--white);
+		width: 95%;
+		margin: 0 auto;
+		margin-top: 30vh;
+		max-width: 450px;
+		border-radius: 1rem;
+		padding: 2rem;
+
+		h1 {
+			font-size: var(--size-600);
+			color: var(--dark-blue);
+			font-weight: 500;
+		}
+
+		p {
+			margin: 20px 0;
+			line-height: 1.6;
+			letter-spacing: 1px;
+			color: var(--grayish-blue);
+		}
+
+		.ModalButtonsContainer {
+			display: flex;
+			justify-content: space-between;
+
+			button {
+				border: none;
+				padding: 1rem 1.5rem;
+				color: var(--white);
+				font-weight: 500;
+				font-size: var(--size-450);
+				border-radius: 0.5rem;
+				opacity: 0.8;
+				transition: 0.5s;
+
+				&:hover {
+					cursor: pointer;
+					opacity: 1;
+					transform: scale(1.1);
+				}
+			}
+
+			.Cancel {
+				background-color: var(--grayish-blue);
+			}
+
+			.Delete {
+				background-color: var(--soft-Red);
+			}
+		}
+	}
+}
