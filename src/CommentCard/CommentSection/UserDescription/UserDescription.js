@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./UserDescription.module.scss";
 import stylesCard from "../CommentSection.module.scss";
-import commentsDataContext from "../../../context/commentsData-context";
+import { useSelector } from "react-redux";
 
 export default function UserDescription({ user, createdAt }) {
-	const { currentUser } = useContext(commentsDataContext);
+	const currentUser = useSelector(state => state.comment.currentUser);
 
 	const classes = `${styles.UserDescription} ${stylesCard.firstGridControl}`;
 

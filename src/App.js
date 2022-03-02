@@ -1,18 +1,40 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import styles from "./App.module.scss";
 import AppContainer from "./AppContainer/AppContainer";
 import CommentCard from "./CommentCard/CommentCard";
-import commentsDataContext from "./context/commentsData-context";
 import AddCommentSection from "./CommentCard/AddCommentSection/AddCommentSection";
 import Loading from "./Loading/Loading";
+import { useSelector, useDispatch } from "react-redux";
+import { uiSliceAction } from "./store/ui-slice";
+import { commentAction } from "./store/comment-slice";
 
 function App() {
-	const { isLoading, comments } = useContext(commentsDataContext);
+	const isLoading = useSelector(state => state.ui.loading);
+	const comments = useSelector(state => state.comment.comments);
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		const fetchInitialUsersData = async () => {
+			const response = await fetch("./data.json");
+			const data = await response.json();
+			dispatch(
+				commentAction.updateCommentsState({
+					currentUser: data.currentUser,
+					comments: data.comments,
+				})
+			);
+
+			setTimeout(() => dispatch(uiSliceAction.setLoading(false), 1000));
+		};
+
+		fetchInitialUsersData();
+	}, [dispatch]);
 
 	const showComments = (
 		<>
 			{isLoading && <Loading />}
 			{!isLoading &&
+				comments.length > 0 &&
 				comments.map(comment => (
 					<CommentCard
 						key={comment.id}
@@ -24,13 +46,15 @@ function App() {
 						replies={comment.replies}
 					/>
 				))}
-			{!isLoading && <AddCommentSection type="Send" replyToID={null} />}
+			{!isLoading && comments.length > 0 && (
+				<AddCommentSection type="Send" replyToID={null} />
+			)}
 		</>
 	);
 
 	return (
 		<div className={styles.app}>
-			<AppContainer>{comments?.length && showComments}</AppContainer>
+			<AppContainer>{showComments}</AppContainer>
 		</div>
 	);
 }

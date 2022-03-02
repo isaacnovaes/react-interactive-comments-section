@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./Action.module.scss";
 import stylesCard from "../CommentSection.module.scss";
 import Delete from "./Delete";
 import Edit from "./Edit";
 import Reply from "./Reply";
-import commentsDataContext from "../../../context/commentsData-context";
+import { useSelector } from "react-redux";
 
 export default function Action({ userID, user, replyTo, editID }) {
-	const { currentUser } = useContext(commentsDataContext);
+	const currentUser = useSelector(state => state.comment.currentUser);
 
 	const classes = `${styles.Action} ${stylesCard.forthGridControl}`;
 
@@ -16,7 +16,7 @@ export default function Action({ userID, user, replyTo, editID }) {
 			<>
 				<Delete userID={userID} />
 
-				<Edit userID={userID} editID = {editID}/>
+				<Edit userID={userID} editID={editID} />
 			</>
 		) : (
 			<Reply userID={userID} replyTo={replyTo} />

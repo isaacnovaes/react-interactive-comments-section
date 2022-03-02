@@ -1,11 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import styles from "./Action.module.scss";
-import commentsDataContext from "../../../context/commentsData-context";
+import { commentAction } from "../../../store/comment-slice";
+import { useDispatch } from "react-redux";
 
 export default function Delete({ userID }) {
-	const context = useContext(commentsDataContext);
+	const dispatch = useDispatch();
 
-	const deleteCommentHandler = () => context.removeComment(userID);
+	const deleteCommentHandler = () =>
+		dispatch(commentAction.removeComment(userID));
 
 	return (
 		<div className={styles.Delete} onClick={deleteCommentHandler}>

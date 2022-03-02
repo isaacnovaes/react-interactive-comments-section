@@ -1,6 +1,8 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState, useRef } from "react";
 import styles from "./AddCommentSection.module.scss";
-import commentsDataContext from "../../context/commentsData-context";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { commentAction } from "../../store/comment-slice";
 
 export default function AddCommentSection({
 	replyToID,
@@ -13,12 +15,13 @@ export default function AddCommentSection({
 	const comment = useRef("");
 	const [error, setError] = useState(false);
 
-	const context = useContext(commentsDataContext);
-
 	const showError = () => setTimeout(() => setError(false), 2500);
 
 	const cancelReplyHandler = () => onShowTestArea(false);
 	const cancelEditHandler = () => onShowEditArea(false);
+
+	const currentUser = useSelector(state => state.comment.currentUser);
+	const dispatch = useDispatch();
 
 	const addCommentHandler = () => {
 		if (comment.current.value.trim() === "") {
@@ -28,26 +31,33 @@ export default function AddCommentSection({
 		}
 
 		if (!replyToID) {
-			context.addComment({
-				id: Math.random() * 100,
-				content: comment.current.value.trim(),
-				createdAt: "1 month ago",
-				score: 0,
-				user: context.currentUser,
-				replies: [],
-			});
+			dispatch(
+				commentAction.addComment({
+					id: Math.random() * 100,
+					content: comment.current.value.trim(),
+					createdAt: "now",
+					score: 0,
+					user: currentUser,
+					replies: [],
+				})
+			);
 		}
 
 		if (replyToID) {
-			context.addReply(replyToID, {
-				id: Math.random() * 100,
-				content: comment.current.value.trim(),
-				createdAt: "1 month ago",
-				score: 0,
-				replyingTo: "hello",
-				user: context.currentUser,
-			});
-
+			dispatch(
+				commentAction.addReply({
+					replyToID,
+					comment: {
+						id: Math.random() * 100,
+						content: comment.current.value.trim(),
+						createdAt: "now",
+						score: 0,
+						replyingTo: "hello",
+						user: currentUser,
+					},
+				})
+			);
+			// CHECK THIS ONE
 			onShowTestArea(false);
 		}
 
@@ -60,13 +70,15 @@ export default function AddCommentSection({
 			showError();
 			return;
 		}
-
 		if (editID) {
-			context.editID({ id: editID, content: comment.current.value.trim() });
-
+			dispatch(
+				commentAction.editComment({
+					id: editID,
+					content: comment.current.value.trim(),
+				})
+			);
 			onShowEditArea(false);
 		}
-
 		comment.current.value = "";
 	};
 
@@ -124,7 +136,7 @@ export default function AddCommentSection({
 				placeholder="Add a comment..."
 				ref={comment}
 			></textarea>
-			<img src={context.currentUser.image.webp} alt="Current user avatar" />
+			<img src={currentUser.image.webp} alt="Current user avatar" />
 			{type === "Send" && (
 				<button
 					type="button"

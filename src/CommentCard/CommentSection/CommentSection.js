@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import UserDescription from "./UserDescription/UserDescription";
 import Comment from "./Comment/Comment";
 import ShowVote from "./ShowVote/ShowVote";
 import Action from "./Action/Action";
 import styles from "./CommentSection.module.scss";
 import AddCommentSection from "../AddCommentSection/AddCommentSection.js";
-import commentsDataContext from "../../context/commentsData-context";
+import { useSelector } from "react-redux";
 
 export default function CommentSection({
 	userID,
@@ -21,7 +21,7 @@ export default function CommentSection({
 	const [replyToID, setReplyToID] = useState(null);
 	const [editIDOf, setEditIDOf] = useState(null);
 
-	const context = useContext(commentsDataContext);
+	const currentUser = useSelector(state => state.comment.currentUser);
 
 	const replyTo = ID => {
 		setReplyToID(ID);
@@ -63,7 +63,7 @@ export default function CommentSection({
 			);
 		}
 
-		if (context.currentUser.username === user.username) {
+		if (currentUser.username === user.username) {
 			return (
 				<Action userID={userID} user={user} replyTo={replyTo} editID={editID} />
 			);

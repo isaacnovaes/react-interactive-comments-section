@@ -2,13 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import "./reset.module.scss";
-import CommentsDataProvider from "./context/CommentsDataProvider.js";
+import { Provider } from "react-redux";
+import store from "./store/index.js";
 
 ReactDOM.render(
 	<React.StrictMode>
-		<CommentsDataProvider>
+		<Provider store={store}>
 			<App />
-		</CommentsDataProvider>
+		</Provider>
 	</React.StrictMode>,
 	document.getElementById("root")
 );
