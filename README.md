@@ -1,6 +1,6 @@
 # Frontend Mentor - Interactive comments section solution
 
-[Live Site](https://your-live-site-url.com)
+[Live Site](https://interactive-comment-section-isaac.netlify.app)
 
 ![Project preview](./design/desktop-preview.jpg)
 
@@ -69,7 +69,7 @@ Users should be able to:
 
 ### Links
 
-- [Live Site](https://your-live-site-url.com)
+- [Live Site](https://interactive-comment-section-isaac.netlify.app)
 
 ## My process
 
