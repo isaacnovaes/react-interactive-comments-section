@@ -17,6 +17,7 @@ export default function ReplySection({ replies, isReplyOfReply }) {
 									createdAt={reply.createdAt}
 									content={reply.content}
 									score={reply.score}
+									currentScore={reply.currentScore}
 									isReplyOfReply={isReplyOfReply}
 								/>
 								{reply.replies?.length > 0 && (

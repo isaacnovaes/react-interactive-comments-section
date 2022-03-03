@@ -23,6 +23,46 @@ const commentSlice = createSlice({
 		resetDeleteCommentID(state) {
 			state.deleteComment = null;
 		},
+		updateVote(state, action) {
+			state.comments = state.comments.map(comment => {
+				if (comment.id === action.payload.id) {
+					// check comments
+					return {
+						...comment,
+						currentScore: comment.currentScore + action.payload.vote,
+					};
+				} else {
+					if (!comment.replies.length > 0) return comment;
+
+					comment.replies = comment.replies.map(reply => {
+						if (reply.id === action.payload.id)
+							// check comment replies
+							return {
+								...reply,
+								currentScore: reply.currentScore + action.payload.vote,
+							};
+						else {
+							if (!reply.replies?.length > 0) return reply;
+
+							reply.replies = reply.replies.map(replyOfReply => {
+								if (replyOfReply.id === action.payload.id)
+									// check replies of a comment reply
+									return {
+										...replyOfReply,
+										currentScore:
+											replyOfReply.currentScore + action.payload.vote,
+									};
+								else return replyOfReply;
+							});
+
+							return reply;
+						}
+					});
+
+					return comment;
+				}
+			});
+		},
 		removeComment(state, action) {
 			state.comments = state.comments
 				.filter(comment => comment.id !== action.payload)

@@ -74,6 +74,7 @@ function App() {
 						user={comment.user}
 						content={comment.content}
 						score={comment.score}
+						currentScore={comment.currentScore}
 						createdAt={comment.createdAt}
 						replies={comment.replies}
 					/>

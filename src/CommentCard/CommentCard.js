@@ -7,6 +7,7 @@ export default function CommentCard({
 	user,
 	content,
 	score,
+	currentScore,
 	createdAt,
 	replies,
 }) {
@@ -18,6 +19,7 @@ export default function CommentCard({
 				createdAt={createdAt}
 				content={content}
 				score={score}
+				currentScore={currentScore}
 			/>
 
 			{replies.length > 0 && (

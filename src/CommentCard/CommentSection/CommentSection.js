@@ -13,6 +13,7 @@ export default function CommentSection({
 	createdAt,
 	content,
 	score,
+	currentScore,
 	isReplyOfReply,
 }) {
 	const [showTextArea, setShowTextArea] = useState(false);
@@ -74,7 +75,7 @@ export default function CommentSection({
 		<div className={styles.CommentSection}>
 			<UserDescription user={user} createdAt={createdAt} />
 			<Comment content={content} />
-			<ShowVote score={score} />
+			<ShowVote score={score} currentScore={currentScore} userID={userID} />
 			{replyOfReply(isReplyOfReply)}
 		</div>
 	);

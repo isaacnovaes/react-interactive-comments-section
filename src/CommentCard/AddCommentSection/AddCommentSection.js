@@ -37,6 +37,7 @@ export default function AddCommentSection({
 					content: comment.current.value.trim(),
 					createdAt: "now",
 					score: 0,
+					currentScore: 0,
 					user: currentUser,
 					replies: [],
 				})
@@ -52,6 +53,7 @@ export default function AddCommentSection({
 						content: comment.current.value.trim(),
 						createdAt: "now",
 						score: 0,
+						currentScore: 0,
 						replyingTo: "hello",
 						user: currentUser,
 					},
