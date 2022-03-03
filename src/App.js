@@ -9,28 +9,58 @@ import { useSelector, useDispatch } from "react-redux";
 import { uiSliceAction } from "./store/ui-slice";
 import { commentSliceAction } from "./store/comment-slice";
 
+let firstRender = true;
+
 function App() {
 	const isLoading = useSelector(state => state.ui.loading);
 	const showModal = useSelector(state => state.ui.showModal);
 	const comments = useSelector(state => state.comment.comments);
 	const dispatch = useDispatch();
 
+	const globalState = useSelector(state => state);
+
 	useEffect(() => {
 		const fetchInitialUsersData = async () => {
 			const response = await fetch("./data.json");
 			const data = await response.json();
-			dispatch(
-				commentSliceAction.updateCommentsState({
-					currentUser: data.currentUser,
-					comments: data.comments,
-				})
-			);
+
+			const appData = {
+				currentUser: data.currentUser,
+				comments: data.comments,
+			};
+
+			if (!localStorage.getItem("globalState")) {
+				dispatch(commentSliceAction.updateCommentsState(appData));
+				localStorage.setItem("globalState", JSON.stringify(appData));
+			}
+
+			if (localStorage.getItem("globalState")) {
+				dispatch(
+					commentSliceAction.updateCommentsState(
+						JSON.parse(localStorage.getItem("globalState"))
+					)
+				);
+			}
 
 			setTimeout(() => dispatch(uiSliceAction.setLoading(false), 1000));
 		};
 
 		fetchInitialUsersData();
 	}, [dispatch]);
+
+	useEffect(() => {
+		if (firstRender) {
+			firstRender = false;
+			return;
+		}
+
+		const { currentUser, comments } = globalState.comment;
+		const appData = {
+			currentUser,
+			comments,
+		};
+		localStorage.setItem("globalState", JSON.stringify(appData));
+	}, [globalState]);
 
 	const showComments = (
 		<>
