@@ -59,7 +59,6 @@ Users should be able to:
 - Create, Read, Update, and Delete comments and replies
 - Upvote and downvote comments
 - **Bonus**: If you're building a purely front-end project, use `localStorage` to save the current state in the browser that persists when the browser is refreshed.
-- **Bonus**: Instead of using the `createdAt` strings from the `data.json` file, try using timestamps and dynamically track the time since the comment or reply was posted.
 
 ### Screenshots
 
@@ -82,29 +81,12 @@ Users should be able to:
 - Flexbox
 - CSS Grid
 - [React](https://reactjs.org/) - JS library
+- Redux
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
-
-To see how you can add code snippets, see below:
-
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-
-```css
-.proud-of-this-css {
-  color: papayawhip;
-}
-```
-
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
+It was an awesome project. I could practice all the fundamentals of React as well as Redux. Initially, I used the Context API to menage the global app data. However, it became unproductive when the possibility to make a reply of a comment reply was added. So it was a great project to practice the main React features
 
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+Now that I feel confident with React, I plan to learn React Router and Framer Motion so that I can make beautiful, animated SPAs. 
